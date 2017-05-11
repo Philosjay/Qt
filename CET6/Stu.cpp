@@ -254,7 +254,7 @@ void Queue::save()
             out<<temp->id;
 
             len=temp->name.size();
-            out.setFieldWidth(10-len);
+            out.setFieldWidth(10);
             out<<temp->name;
 
             out.setFieldWidth(10);
