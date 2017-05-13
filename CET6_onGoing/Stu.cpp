@@ -71,8 +71,6 @@ void Queue::AddStu(QString id,QString name,QString score,QString rank)
 
 void Queue::load()
 {
-    isChanged=true;
-
     QFile file(curFile);
     file.open(QFile::ReadOnly);
     QTextStream in(&file);
@@ -147,7 +145,7 @@ Stu* Queue::find(QString NameId)	//支持学号姓名查找
 
 void Queue::sort()
 {
-    if(tobeSort)
+    if(isChanged)
     {
         int n = count;
 
@@ -210,7 +208,6 @@ void Queue::sort()
 
         }
 
-        tobeSort=false;
     }
 
 

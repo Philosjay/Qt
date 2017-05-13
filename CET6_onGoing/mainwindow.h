@@ -44,6 +44,8 @@ private slots:
 
     void on_sort_triggered();
 
+    void on_action_S_triggered();
+
 private:
     Ui::MainWindow *ui;
     Queue* pq;

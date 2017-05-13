@@ -1,4 +1,5 @@
-﻿#include "mainwindow.h"
+﻿#define WRITING 160
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include"listdialog.h"
 #include"Stu.h"
@@ -31,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     Queue* pq=new Queue;
     this->pq=pq;
-    writing=new float(160);
+    writing=new float(WRITING);
 
     QMessageBox mes;
     mes.setText(QStringLiteral("**初始化**"));
@@ -49,7 +50,12 @@ MainWindow::MainWindow(QWidget *parent) :
         {
             this->pq->setCurFile(fileName);
             this->pq->load();
+            this->pq->sort();
             this->pq->setTitled();
+        }
+        else
+        {
+            pq->setCurFile("temp.txt");
         }
 
     }
@@ -180,47 +186,68 @@ void MainWindow::on_listButton_triggered()
 void MainWindow::on_outport_triggered()
 {
     QString fileName=QFileDialog::getSaveFileName(this,QStringLiteral("另存为"),"info.txt");
-    QFile file(fileName);
-    file.open(QFile::WriteOnly|QFile::Text);
-    QTextStream out(&file);
+    if(fileName.length()!=0)
+    {
+        QFile file(fileName);
+        file.open(QFile::WriteOnly|QFile::Text);
+        QTextStream out(&file);
 
-    QFile base(pq->showCurFile());
-    base.open(QFile::ReadOnly|QFile::Text);
-    QTextStream in(&base);
+        QFile base(pq->showCurFile());
+        base.open(QFile::ReadOnly|QFile::Text);
+        QTextStream in(&base);
 
-    out<<in.readAll();
+        out<<in.readAll();
+    }
+
 }
 
 void MainWindow::on_emptyList_triggered()
 {
-    pq->save();
-    delete pq;//先删除原有Queue
-
     QString fileName=QFileDialog::getSaveFileName(this,QStringLiteral("新建成绩单"));
-    pq=new Queue;
-    pq->setTitled();
-    pq->setCurFile(fileName);
+    if(fileName.length()!=0)
+    {
+        pq->save();
+        delete pq;//先删除原有Queue
+        pq=new Queue;
+        pq->setTitled();
+        pq->setCurFile(fileName);
+        pq->setChanged();
+        pq->save();
+
+    }
+
 }
 
 void MainWindow::on_hireddList_triggered()
 {
-    pq->save();
+
     QString fileName=QFileDialog::getSaveFileName(this,QStringLiteral("新建成绩单"));
-    pq->setTitled();
-    pq->setCurFile(fileName);
-    pq->setChanged();
+    if(fileName.length()!=0)
+    {
+        pq->save();
+        pq->setTitled();
+        pq->setCurFile(fileName);
+        pq->setChanged();
+        pq->save();
+    }
+
 }
 
 void MainWindow::on_loadList_triggered()
 {
-    pq->save();
-    delete pq;
+
 
     QString fileName=QFileDialog::getOpenFileName(this,QStringLiteral("选择待读取的成绩单"));
-    pq=new Queue;
-    pq->setCurFile(fileName);
-    pq->setTitled();
-    pq->load();
+    if(fileName.length()!=0)    //读取窗口被关闭
+    {
+        pq->save();
+        delete pq;
+        pq=new Queue;
+        pq->setCurFile(fileName);
+        pq->setTitled();
+        pq->load();
+    }
+
 
 }
 
@@ -233,4 +260,9 @@ void MainWindow::on_setWriting_triggered()
 void MainWindow::on_sort_triggered()
 {
     pq->sort();
+}
+
+void MainWindow::on_action_S_triggered()
+{
+    pq->save();
 }

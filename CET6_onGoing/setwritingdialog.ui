@@ -91,6 +91,12 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit1</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>yesPushButton</tabstop>
+  <tabstop>noPushButton</tabstop>
+ </tabstops>
  <resources>
   <include location="icon.qrc"/>
  </resources>

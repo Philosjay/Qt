@@ -26,7 +26,7 @@ public:
     void deleteScore();
     void setCurFile(QString fileName);
     bool tobeSave(){return isChanged;}  //是否保存
-    void setChanged(){isChanged=true;tobeSort=true;}
+    void setChanged(){isChanged=true;}
     void setTitled(){isUntitled=false;}
     bool scanner(Stu **pt);
     QString showCurFile();
@@ -36,7 +36,6 @@ public:
 		count = 0;
         isUntitled=true;
         isChanged=false;
-        tobeSort=true;
 		front = rear = NULL;
 	}
 private:
@@ -48,7 +47,6 @@ private:
     QString curFile;
     bool isUntitled; //判断是否保存在新文件
     bool isChanged;    //change是相对于保存记录，判断是否要保存
-    bool tobeSort;  //这是相对于信息变动，判断是否排序
 
 };
 

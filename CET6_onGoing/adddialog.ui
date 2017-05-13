@@ -139,6 +139,15 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>idlineEdit</tabstop>
+  <tabstop>namelineEdit</tabstop>
+  <tabstop>scorelineEdit</tabstop>
+  <tabstop>calculatepushButton</tabstop>
+  <tabstop>ranklineEdit</tabstop>
+  <tabstop>yesButton</tabstop>
+  <tabstop>noButton</tabstop>
+ </tabstops>
  <resources>
   <include location="icon.qrc"/>
  </resources>

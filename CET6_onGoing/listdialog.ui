@@ -121,6 +121,11 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>textEdit</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>outport</tabstop>
+ </tabstops>
  <resources>
   <include location="icon.qrc"/>
  </resources>
