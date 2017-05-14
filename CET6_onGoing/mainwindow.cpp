@@ -138,7 +138,7 @@ void MainWindow::on_findpushButton_clicked()
 
 
 void MainWindow::on_addButton_clicked()
-{
+{   
     addDialog add(writing,pq);
     add.exec();
 }

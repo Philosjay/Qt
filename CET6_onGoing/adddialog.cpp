@@ -38,8 +38,20 @@ void addDialog::on_yesButton_clicked()
     }
     else
     {
-        pq->ChangeInfo(ui->idlineEdit->text(),ui->namelineEdit->text(),
-                       ui->scorelineEdit->text().toFloat(),ui->ranklineEdit->text().toInt());
+        QMessageBox mes;
+        mes.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+        mes.setButtonText(QMessageBox::Yes,QStringLiteral("是"));
+        mes.setButtonText(QMessageBox::No,QStringLiteral("否"));
+        mes.setText(QStringLiteral("该考生已存在"));
+        mes.setInformativeText(QStringLiteral("是否更新其信息？"));
+        int ret=mes.exec();
+        if(ret==QMessageBox::Yes)
+        {
+            pq->ChangeInfo(ui->idlineEdit->text(),ui->namelineEdit->text(),
+                           ui->scorelineEdit->text().toFloat(),ui->ranklineEdit->text().toInt());
+            pq->setChanged();
+        }
+
     }
 
 }
